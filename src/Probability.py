@@ -96,10 +96,10 @@ class ProbabilityMatrix:
     def compute_log_matrix(self):
         """
         Compute matrix storing log transition probabilities
-        I adjust to avoid taking the log of 0 by adding a small number
+        I adjust to avoid taking the log of 0 by adding 1
         """
         log_matrix = np.zeros_like(self.matrix)
-        return np.log(self.matrix + 0.0001*np.min(self.matrix[self.matrix != 0]))
+        return np.log(self.matrix + 1)
 
     def get_probability(self, char_1, char_2):
         """

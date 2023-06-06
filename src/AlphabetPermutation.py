@@ -1,4 +1,5 @@
 import random
+from datetime import datetime
 
 
 class AlphabetPermutation:
@@ -33,6 +34,7 @@ class AlphabetPermutation:
         Returns:
         - dict: The generated permutation mapping.
         """
+        random.seed(datetime.now().timestamp())
         alphabet_list = self.alphabet.copy()
         alphabet_list.remove(" ")
         random.shuffle(alphabet_list)
@@ -71,3 +73,16 @@ class AlphabetPermutation:
             else:
                 permuted_string += char
         return permuted_string
+
+
+    def swap_letters(self, i, j):
+        """
+        Given the position of two letters to swap (so if we give 0, 1 it will swap the values associated to a and b)
+        """
+        if (i < 0 | i > 25 | j < 0 | i > 25):
+            print("You are messing things up you can't call it on these")
+        i = chr(i + 97)
+        j = chr(j + 97)
+
+        self.permutation[i], self.permutation[j] = self.permutation[j], self.permutation[i] 
+        
