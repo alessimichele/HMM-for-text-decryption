@@ -70,6 +70,37 @@ class ProbabilityMatrix:
         ones = np.sum(self.matrix)
         self.matrix = self.matrix / ones
 
+    def compute_matrix_spaces(self):
+        """
+        Computes the probability matrix based on the input text.
+        It also preserves the white spaces in this case
+        """
+        for i in range(len(self.text) - 1):
+            current_char = self.text[i]
+            next_char = self.text[i + 1]
+
+            if current_char in self.alphabet and next_char in self.alphabet:
+                current_index = self.alphabet.index(current_char)
+                next_index = self.alphabet.index(next_char)
+                self.matrix[next_index, current_index] += 1
+
+            elif current_char not in self.alphabet:
+                raise ValueError(f"Character: {current_char} not in alphabet")
+
+            elif next_char not in self.alphabet:
+                raise ValueError(f"Character: {next_char} not in alphabet")
+
+        ones = np.sum(self.matrix)
+        self.matrix = self.matrix / ones
+
+    def compute_log_matrix(self):
+        """
+        Compute matrix storing log transition probabilities
+        I adjust to avoid taking the log of 0 by adding a small number
+        """
+        log_matrix = np.zeros_like(self.matrix)
+        return np.log(self.matrix + 0.0001*np.min(self.matrix[self.matrix != 0]))
+
     def get_probability(self, char_1, char_2):
         """
         Returns the probability of char_2 given char_1.
