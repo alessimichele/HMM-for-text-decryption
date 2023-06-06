@@ -1,5 +1,7 @@
 # HMM-for-text-decryption
 
+**[Qui](try.ipynb) c'è una prova dell'idea dell'algoritmo descritto da [Diaconis](articles/MCMCRev.pdf), che non funziona**
+
 This repository contains (for now) two Python classes that are useful for text decryption using Hidden Markov Models (HMMs).
 
 - [Probability.py](src/Probability.py) is a class that computes transition probabilities based on a given text and alphabet. It provides methods to compute the probability matrix, retrieve individual probabilities, and print the computed probabilities. The class helps in analyzing the statistical patterns of character transitions in the text.
