@@ -132,4 +132,4 @@ class ProbabilityMatrix:
         - unknown_chars (list): A list of unknown characters.
         """
         for char in unknown_chars:
-            self.text = self.text.replace(char, "")
+            self.text = self.text.replace(char, " ")
