@@ -63,6 +63,7 @@ class AlphabetPermutation:
         Returns:
         - str: The permuted string.
         """
+        string = string.lower()
         permuted_string = ""
         for char in string:
             if char in self.permutation:
