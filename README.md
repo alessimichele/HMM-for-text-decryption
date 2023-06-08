@@ -1,59 +1,34 @@
 # HMM-for-text-decryption
 
-**[Qui](try.ipynb) c'è una prova dell'idea dell'algoritmo descritto da [Diaconis](articles/MCMCRev.pdf), che non funziona**
+**[Qui](main.ipynb) c'è l'algoritmo descritto da [Diaconis](articles/MCMCRev.pdf), che FUNZIONA!**
 
 This repository contains (for now) two Python classes that are useful for text decryption using Hidden Markov Models (HMMs).
 
-- [Probability.py](src/Probability.py) is a class that computes transition probabilities based on a given text and alphabet. It provides methods to compute the probability matrix, retrieve individual probabilities, and print the computed probabilities. The class helps in analyzing the statistical patterns of character transitions in the text.
-Example:
-Most likely couple of world inside Moby Dick text:
-```
-p(t|h) = 0.04275806212268933
-p(h|e) = 0.03614000002773706
-p(i|n) = 0.02706443457313361
-p(a|n) = 0.020653013562034625
-p(e|r) = 0.020310460892828168
-p(r|e) = 0.015982092955203264
-p(h|a) = 0.0157324594310852
-p(n|d) = 0.014948887535936825
-p(a|t) = 0.014005827555935244
-p(n|g) = 0.01365772747508172
-p(h|i) = 0.01308357036961017
-p(o|n) = 0.012614814085432913
-p(e|d) = 0.012610653526697612
-p(e|n) = 0.012161313183285094
-p(s|t) = 0.011879782042196387
-```
-- [AlphabetPermutation.py](src/AlphabetPermutation.py)  is a class that facilitates text encryption. Given an alphabet, it generates a permutation of the characters and provides a method to encrypt text using the generated permutation.
-Example:
-```
-Permutation:
-a -> u
-b -> i
-c -> v
-d -> o
-e -> x
-f -> n
-g -> q
-h -> m
-i -> g
-j -> h
-k -> d
-l -> w
-m -> c
-n -> s
-o -> b
-p -> y
-q -> a
-r -> f
-s -> p
-t -> l
-u -> j
-v -> z
-w -> r
-x -> k
-y -> e
-z -> t
-Original string: hello world
-Permuted string: mxwwb rbfwo
-```
+- [CipherBreaker.py](src/CipherBreaker.py) 
+    - Cipher Generator
+        The Cipher Generator is a Python class that allows you to generate a random cipher. A cipher is essentially a shuffled version of the alphabet. This class provides a method called generate_cipher() that returns a list representing the generated cipher.
+
+    - Text Encoder
+        The Text Encoder is a Python class that provides functionality to encode text using a given cipher. It has a method called encode_text(text, cipher) that takes an input text and a cipher as parameters and returns the encoded text as a string.
+
+    - Text Decoder
+        The Text Decoder is a Python class that enables the decoding of encoded text using a provided cipher. It contains a method called decode_text(text, cipher) that takes an encoded text and a cipher as input and returns the decoded text as a string.
+
+    - Text Likelihood
+        The Text Likelihood class is designed to calculate the log-likelihood of a given text based on a probability table. This class contains a method called get_log_likelihood(text, probability_table) that takes an input text and a probability table as parameters and returns the log-likelihood as a floating-point value.
+
+    - Text Preprocessor
+        The Text Preprocessor is a Python class that performs preprocessing operations on text. It provides various methods for text preprocessing, including checking for uppercase characters, converting text to lowercase, finding unknown characters in the text, removing unknown characters from the text, and saving the preprocessed text to a file.
+
+
+
+- [ProbabilityMatrix.py](src/ProbabilityMatrix.py) The Probability Matrix is a Python class designed to compute the probability matrix for two-character sequences in a given text. It offers methods for computing the probability table, retrieving the probability of a specific sequence, and saving the computed data to files.
+
+
+- [CipherBreaker.py](src/CipherBreaker.py) The Cipher Breaker is a Python class that aims to break a given cipher by performing iterations of swapping elements in the current cipher. It uses a probability table, a decoder, and a likelihood calculator to evaluate the quality of each proposed cipher during the breaking process. The class also provides functionality to generate an animation of the breaking process.
+
+# Example
+
+The following gif is the result of running [main.ipynb](main.ipynb).
+
+![](GIF/she%20is%20not.gif)
