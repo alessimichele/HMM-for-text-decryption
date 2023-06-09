@@ -2,7 +2,7 @@
 
 **[Qui](main.ipynb) c'è l'algoritmo descritto da [Diaconis](articles/MCMCRev.pdf), che FUNZIONA!**
 
-This repository contains (for now) two Python classes that are useful for text decryption using Hidden Markov Models (HMMs).
+This repository contains (for now) a Python implementation of a MCMC method useful for text decryption.
 
 CipherBreaker ora ha come attribute history, un dizionario che ha come keys i testi decriptati a ogni iterazione e con value la log likelihood, in questo modo possimo estrarceli tutti.
 
@@ -16,21 +16,24 @@ CipherBreaker ora ha come attribute history, un dizionario che ha come keys i te
     - Text Decoder
         The Text Decoder is a Python class that enables the decoding of encoded text using a provided cipher. It contains a method called decode_text(text, cipher) that takes an encoded text and a cipher as input and returns the decoded text as a string.
 
-    - Text Likelihood
-        The Text Likelihood class is designed to calculate the log-likelihood of a given text based on a probability table. This class contains a method called get_log_likelihood(text, probability_table) that takes an input text and a probability table as parameters and returns the log-likelihood as a floating-point value.
-
     - Text Preprocessor
-        The Text Preprocessor is a Python class that performs preprocessing operations on text. It provides various methods for text preprocessing, including checking for uppercase characters, converting text to lowercase, finding unknown characters in the text, removing unknown characters from the text, and saving the preprocessed text to a file.
+        The Text Preprocessor is a Python class that performs preprocessing operations on text. It provides methods for converting text to lowercase, finding unknown characters in the text, removing unknown characters from the text, removing extra-spaces, and saving the preprocessed text to a file.
 
 
 
-- [ProbabilityMatrix.py](src/ProbabilityMatrix.py) The Probability Matrix is a Python class designed to compute the probability matrix for two-character sequences in a given text. It offers methods for computing the probability table, retrieving the probability of a specific sequence, and saving the computed data to files.
+- [ProbabilityMatrix.py](src/ProbabilityMatrix.py) 
+    The Probability Matrix is a Python class designed to compute the probability matrix for two-character sequences in a given text. It offers methods for computing the probability table, retrieving the probability of a specific sequence, and saving the computed data to files.
 
 
-- [CipherBreaker.py](src/CipherBreaker.py) The Cipher Breaker is a Python class that aims to break a given cipher by performing iterations of swapping elements in the current cipher. It uses a probability table, a decoder, and a likelihood calculator to evaluate the quality of each proposed cipher during the breaking process. The class also provides functionality to generate an animation of the breaking process.
+- [CipherBreaker.py](src/CipherBreaker.py) 
+    The Cipher Breaker is a Python class that aims to break a given cipher by performing iterations of swapping elements in the current cipher. It uses a probability table, a decoder, and a likelihood calculator to evaluate the quality of each proposed cipher during the breaking process. The class also provides functionality to generate an animation of the breaking process.
 
 # Example
 
-The following gif is the result of running [main.ipynb](main.ipynb).
+The following gifs are the result of running [main.ipynb](main.ipynb) with different text.
 
 ![](GIF/she%20is%20not.gif)
+
+![](GIF/your%20plan.gif)
+
+![](GIF/your%20plan.gif)
