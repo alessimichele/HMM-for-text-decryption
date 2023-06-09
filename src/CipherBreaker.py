@@ -23,7 +23,7 @@ class CipherBreaker:
             TextDecoder()
         )  # self.decoder.decode_text(text, permutated_cipher)
 
-        self.history = {self.ciphered_text: self.get_log_likelihood(self.ciphered_text)}
+        self.history = {self.ciphered_text: [0, self.get_log_likelihood(self.ciphered_text)]}
 
         # self.decoded_texts = []  # List to store decoded texts
 
@@ -106,7 +106,7 @@ class CipherBreaker:
                 i += 1
 
                 # self.decoded_texts.append(decoded_text_proposed)  # Store decoded text
-                self.history[decoded_text_proposed] = proposed_log_likelihood
+                self.history[decoded_text_proposed] = [ _ , proposed_log_likelihood]
 
         return self.current_cipher
 
@@ -116,8 +116,9 @@ class CipherBreaker:
         If log_lik = True it returns a list of item value pairs
         """
         sorted_dict = dict(
-            sorted(self.history.items(), key=lambda item: item[1], reverse=True)
+            sorted(self.history.items(), key=lambda x: x[1][1], reverse=True)
         )
+
         if return_likelihood == True:
             return list(sorted_dict.items())[:n_extract]
 
