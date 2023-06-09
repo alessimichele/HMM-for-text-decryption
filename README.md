@@ -33,7 +33,7 @@ The method is applied for decrypting messages which have been encoded using a su
     
 - [texts](texts/) contains the texts used to learn the transition probabilities.
 
-- [outputs](ouputs/) contains some ```.txt``` outputs from [main.ipynb](main.ipynb).
+- [outputs](outputs/) contains some ```.txt``` outputs from [main.ipynb](main.ipynb).
 
 - [GIF](GIF/) contains ```.gif``` outputs from [main.ipynb](main.ipynb).
 
