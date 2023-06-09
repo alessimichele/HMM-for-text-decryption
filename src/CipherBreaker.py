@@ -22,11 +22,13 @@ class CipherBreaker:
         self.decoder = TextDecoder()  # self.decoder.decode_text(text, permutated_cipher)
         self.lik = TextLik()  # self.lik.get_log_lik_text(text, probability_table)
 
-        self.decoded_texts = []  # List to store decoded texts
+        self.history = {self.ciphered_text: self.lik.get_log_likelihood(self.ciphered_text, probability_table)}
+
+        # self.decoded_texts = []  # List to store decoded texts
 
         # Store maximum log-likelihood achieved 
-        self.max_log_lik = self.lik.get_log_likelihood(self.ciphered_text, probability_table)
-        self.max_lik_text = self.ciphered_text
+        #self.max_log_lik = self.lik.get_log_likelihood(self.ciphered_text, probability_table)
+        #self.max_lik_text = self.ciphered_text
 
 
     def swap(self, x):
@@ -84,16 +86,14 @@ class CipherBreaker:
 
             if accept:
                 self.current_cipher = proposed_cipher
-                
-                if self.max_log_lik < proposed_log_likelihood:
-                    self.max_log_lik = proposed_log_likelihood
-                    self.max_lik_text = decoded_text_proposed
 
                 if print_interval is not None and i % print_interval == 0:
                     print(f"Iter {i}: {decoded_text_proposed}")
                 i += 1
 
-                self.decoded_texts.append(decoded_text_proposed)  # Store decoded text
+                # self.decoded_texts.append(decoded_text_proposed)  # Store decoded text
+                self.history[decoded_text_proposed] = proposed_log_likelihood
+
 
         return self.current_cipher
 
@@ -105,7 +105,8 @@ class CipherBreaker:
 
         def update(i):
             plt.clf()
-            decoded_text = self.decoded_texts[i]
+            # decoded_text = self.decoded_texts[i]
+            decoded_text = list(self.history.keys())[i]
             lines = []
             current_line = ""
             for word in decoded_text.split():
@@ -127,7 +128,7 @@ class CipherBreaker:
             plt.axis("off")
 
         anim = FuncAnimation(
-            fig, update, frames=len(self.decoded_texts), interval=100
+            fig, update, frames=len(self.history), interval=100
         )  # Decreased interval for faster animation
 
         if filename != "cipher_iterations.gif":
