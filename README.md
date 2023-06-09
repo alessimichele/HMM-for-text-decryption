@@ -4,6 +4,8 @@
 
 This repository contains (for now) two Python classes that are useful for text decryption using Hidden Markov Models (HMMs).
 
+CipherBreaker ora ha come attribute history, un dizionario che ha come keys i testi decriptati a ogni iterazione e con value la log likelihood, in questo modo possimo estrarceli tutti.
+
 - [CipherBreaker.py](src/CipherBreaker.py) 
     - Cipher Generator
         The Cipher Generator is a Python class that allows you to generate a random cipher. A cipher is essentially a shuffled version of the alphabet. This class provides a method called generate_cipher() that returns a list representing the generated cipher.
