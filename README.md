@@ -32,18 +32,17 @@ CipherBreaker ora ha come attribute history, un dizionario che ha come keys i te
 
 The following gifs are the result of running [main.ipynb](main.ipynb) with different text.
 
-Original text: "she is not acting by design. As yet she cannot even be certain of the degree of her own regard, nor of its reasonableness. She has known him only a fortnight. She danced four dances with him at Meryton; she saw him one morning at his own house, and has since dined in company with him four times."
+Original Text: she is not acting by design as yet she cannot even be certain of the degree of her own regard nor of its reasonableness she has known him only a fortnight she danced four dances with him at meryton she saw him one morning at his own house and has since dined in company with him four times
 
 ![](GIF/she%20is%20not.gif)
 
 
-Original text: "your plan is a good one,” replied Elizabeth, “where nothing is in question but the desire of being well married; and if I were determined to get a rich husband, or any husband, I dare say I should adopt it. But these are not Jane’s feelings"
-
+Original Text: your plan is a good one replied elizabeth where nothing is in question but the desire of being well married and if i were determined to get a rich husband or any husband i dare say i should adopt it but these are not jane s feelings
 
 ![](GIF/your%20plan.gif)
 
 
-Original text: "There were better sense in the sad mechanic exercise of determining the reason of its absence where it is not. In the novels of the last hundred years there are vast numbers of young ladies with whom it might be a pleasure to fall in love; there are at least five with whom, as it seems to me, no man of taste and spirit can help doing so."
+Original Text: there were better sense in the sad mechanic exercise of determining the reason of its absence where it is not in the novels of the last hundred years there are vast numbers of young ladies with whom it might be a pleasure to fall in love there are at least five with whom as it seems to me no man of taste and spirit can help doing so
 
 
-![](GIF/there%20were%20better.gif)
+![](GIF/there%20were.gif)
