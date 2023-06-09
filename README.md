@@ -3,6 +3,7 @@
 **[Qui](main.ipynb) c'è l'algoritmo descritto da [Diaconis](articles/MCMCRev.pdf), che FUNZIONA!**
 
 This repository contains (for now) a Python implementation of a MCMC method useful for text decryption.
+The method is applied for decrypting messages which have been encoded using a substitution cipher.
 
 CipherBreaker ora ha come attribute history, un dizionario che ha come keys i testi decriptati a ogni iterazione e con value la log likelihood, in questo modo possimo estrarceli tutti.
 
