@@ -96,6 +96,18 @@ class CipherBreaker:
 
 
         return self.current_cipher
+    
+    
+    def extract_best(self, n_extract = 5, return_likelihood = False):
+        """
+        Extracts the n_extract decoded texts with the highest log-likelihood.
+        If log_lik = True it returns a list of item value pairs
+        """
+        sorted_dict = dict(sorted(self.history.items(), key=lambda item: item[1], reverse = True))
+        if return_likelihood == True:
+            return list(sorted_dict.items())[:n_extract]
+        
+        return list(sorted_dict.keys())[:n_extract]
 
     def generate_animation(self, filename="cipher_iterations.gif"):
         """
