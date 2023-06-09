@@ -7,16 +7,16 @@ This repository contains (for now) a Python implementation of a MCMC method usef
 CipherBreaker ora ha come attribute history, un dizionario che ha come keys i testi decriptati a ogni iterazione e con value la log likelihood, in questo modo possimo estrarceli tutti.
 
 - [CipherUtils.py](src/CipherUtils.py) 
-    - Cipher Generator
+    - Cipher Generator \
         The Cipher Generator is a Python class that allows you to generate a random cipher. A cipher is essentially a shuffled version of the alphabet. This class provides a method called generate_cipher() that returns a list representing the generated cipher.
 
-    - Text Encoder
+    - Text Encoder \
         The Text Encoder is a Python class that provides functionality to encode text using a given cipher. It has a method called encode_text(text, cipher) that takes an input text and a cipher as parameters and returns the encoded text as a string.
 
-    - Text Decoder
+    - Text Decoder \
         The Text Decoder is a Python class that enables the decoding of encoded text using a provided cipher. It contains a method called decode_text(text, cipher) that takes an encoded text and a cipher as input and returns the decoded text as a string.
 
-    - Text Preprocessor
+    - Text Preprocessor \
         The Text Preprocessor is a Python class that performs preprocessing operations on text. It provides methods for converting text to lowercase, finding unknown characters in the text, removing unknown characters from the text, removing extra-spaces, and saving the preprocessed text to a file.
 
 
