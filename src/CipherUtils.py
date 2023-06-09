@@ -65,9 +65,10 @@ class TextDecoder:
         return "".join(decoded_text)
 
 
+"""
 class TextLik:
     def get_log_likelihood(self, text, probability_table):
-        """
+        ""
         Calculates the log-likelihood of the given text based on a probability table.
 
         Args:
@@ -76,7 +77,7 @@ class TextLik:
 
         Returns:
             float: The log-likelihood of the text.
-        """
+        ""
         two_char_list = [text[i : i + 2] for i in range(len(text) - 1)]
         probabilities = [
             probability_table.get(two_char, 1 / len(probability_table))
@@ -84,6 +85,7 @@ class TextLik:
         ]
         log_likelihood = sum(math.log(prob) for prob in probabilities)
         return log_likelihood
+"""
 
 
 class TextPreProcessor:
@@ -155,7 +157,7 @@ class TextPreProcessor:
         for char in unknown_chars:
             text = text.replace(char, " ")
         return text
-    
+
     def remove_additional_spaces(self, text):
         """
         Removes multiple whitespaces with only one if there are some.
@@ -165,7 +167,7 @@ class TextPreProcessor:
         """
         text = " ".join(text.split())
         return text
-        
+
     def save_text(self, text):
         """
         Saves the preprocessed text to a file named 'text_preprocessed.txt'.
