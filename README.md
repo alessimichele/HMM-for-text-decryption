@@ -21,19 +21,29 @@ CipherBreaker ora ha come attribute history, un dizionario che ha come keys i te
 
 
 
-- [ProbabilityMatrix.py](src/ProbabilityMatrix.py) 
+- [ProbabilityMatrix.py](src/ProbabilityMatrix.py) \
     The Probability Matrix is a Python class designed to compute the probability matrix for two-character sequences in a given text. It offers methods for computing the probability table, retrieving the probability of a specific sequence, and saving the computed data to files.
 
 
-- [CipherBreaker.py](src/CipherBreaker.py) 
+- [CipherBreaker.py](src/CipherBreaker.py) \
     The Cipher Breaker is a Python class that aims to break a given cipher by performing iterations of swapping elements in the current cipher. It uses a probability table, a decoder, and a likelihood calculator to evaluate the quality of each proposed cipher during the breaking process. The class also provides functionality to generate an animation of the breaking process.
 
 # Example
 
 The following gifs are the result of running [main.ipynb](main.ipynb) with different text.
 
+Original text: "she is not acting by design. As yet she cannot even be certain of the degree of her own regard, nor of its reasonableness. She has known him only a fortnight. She danced four dances with him at Meryton; she saw him one morning at his own house, and has since dined in company with him four times."
+
 ![](GIF/she%20is%20not.gif)
 
-![](GIF/your%20plan.gif)
+
+Original text: "your plan is a good one,” replied Elizabeth, “where nothing is in question but the desire of being well married; and if I were determined to get a rich husband, or any husband, I dare say I should adopt it. But these are not Jane’s feelings"
+
 
 ![](GIF/your%20plan.gif)
+
+
+Original text: "There were better sense in the sad mechanic exercise of determining the reason of its absence where it is not. In the novels of the last hundred years there are vast numbers of young ladies with whom it might be a pleasure to fall in love; there are at least five with whom, as it seems to me, no man of taste and spirit can help doing so."
+
+
+![](GIF/there%20were%20better.gif)
