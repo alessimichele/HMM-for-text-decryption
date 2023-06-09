@@ -6,30 +6,36 @@ from matplotlib.animation import FuncAnimation
 
 
 class CipherBreaker:
-    def __init__(self, starting_cipher, ciphered_text, probability_table):
+    def __init__(self, cipher_generator, ciphered_text, probability_table):
         """
         Initializes the CipherBreaker object.
 
         Args:
-            starting_cipher (list): The starting cipher to break.
+            cipher_generator (CypherGenerator Class): An object of the ciphergenerator class
             ciphered_text (str): The ciphered text.
             probability_table (dict): A probability table mapping two-character sequences to their probabilities.
         """
-        self.current_cipher = starting_cipher
+
+        self.cipher_generator = cipher_generator
+        self.current_cipher = self.cipher_generator.generate_cipher() # Initialize the current cipher to a randomly generated one
         self.ciphered_text = ciphered_text
         self.probability_table = probability_table
 
         self.decoder = (
             TextDecoder()
-        )  # self.decoder.decode_text(text, permutated_cipher)
+        ) 
 
+        # history will store all the deciphered messages and the first time we find them and the log-likelihood associated to those
+        # It is a dictionary with structure text : [first_iteration_found, log_likelihood]
         self.history = {self.ciphered_text: [0, self.get_log_likelihood(self.ciphered_text)]}
 
-        # self.decoded_texts = []  # List to store decoded texts
 
-        # Store maximum log-likelihood achieved
-        # self.max_log_lik = self.lik.get_log_likelihood(self.ciphered_text, probability_table)
-        # self.max_lik_text = self.ciphered_text
+
+    def restart_cipher(self):
+        """
+        Generates a new random starting permutation for the alphabet
+        """
+        self.current_cipher = self.cipher_generator.generate_cipher()
 
     def swap(self, x):
         """
@@ -75,7 +81,7 @@ class CipherBreaker:
             list: The final deciphered cipher.
         """
         i = 0
-        for _ in range(iterations):
+        for it in range(iterations):
             proposed_cipher = self.swap(self.current_cipher.copy())
 
             decoded_text_proposed = self.decoder.decode_text(
@@ -106,9 +112,60 @@ class CipherBreaker:
                 i += 1
 
                 # self.decoded_texts.append(decoded_text_proposed)  # Store decoded text
-                self.history[decoded_text_proposed] = [ _ , proposed_log_likelihood]
+                if self.history.get(decoded_text_proposed) == None:
+                        self.history[decoded_text_proposed] = [ it , proposed_log_likelihood]
 
-        return self.current_cipher
+    def break_cipher_nstart(self, iterations=10000, print_interval=20, nstart = 2):
+        """
+        Breaks the cipher by performing iterations of swapping elements in the current cipher.
+        It uses nstart starting points instead of only one, to try and avoid the situation where we are stuck in one.
+
+        Args:
+            iterations (int, optional): The number of iterations to perform in total. Defaults to 10000.
+            print_interval (int, optional): The interval at which to print the decoded text. Set to None to disable printing. Defaults to 20.
+            n_iter (int, optional): The number of randomly generated starting points.
+
+        Returns:
+            list: The final deciphered cipher.
+        """
+        for s in range(nstart):
+           i = 0
+           self.restart_cipher()
+           for it in range(int(iterations/nstart)):
+                proposed_cipher = self.swap(self.current_cipher.copy())
+
+                decoded_text_proposed = self.decoder.decode_text(
+                    self.ciphered_text, proposed_cipher
+                )
+                decoded_text_current = self.decoder.decode_text(
+                    self.ciphered_text, self.current_cipher
+                )
+
+                proposed_log_likelihood = self.get_log_likelihood(decoded_text_proposed)
+                current_log_likelihood = self.get_log_likelihood(decoded_text_current)
+
+                acceptance_probability = min(
+                    1, math.exp(proposed_log_likelihood - current_log_likelihood)
+                )
+
+                accept = random.choices(
+                    [True, False],
+                    weights=[acceptance_probability, 1 - acceptance_probability],
+                    k=1,
+                )[0]
+
+                if accept:
+                    self.current_cipher = proposed_cipher
+
+                    if print_interval is not None and i % print_interval == 0:
+                        print(f"Iter {i} of start {s+1}: {decoded_text_proposed}")
+                    i += 1
+
+                    # self.decoded_texts.append(decoded_text_proposed)  # Store decoded text
+                    # In this case we keep the number of iterations in the last, could also store the mean or something else
+                    if self.history.get(decoded_text_proposed) == None:
+                        self.history[decoded_text_proposed] = [ it , proposed_log_likelihood]
+            
 
     def extract_best(self, n_extract=5, return_likelihood=False):
         """

@@ -62,4 +62,5 @@ Original Text: *there were better sense in the sad mechanic exercise of determin
 
 ## Last big updates
 
-CipherBreaker ora ha come attribute history, un dizionario che ha come keys i testi decriptati a ogni iterazione e con value la log likelihood, in questo modo possimo estrarceli tutti.
+- Aggiornato history che ora mantiene anche la prima iterazione dove il messaggio è decryptato in un determinato modo oltre che alla log-likelihood associata.
+- Aggiunto il metodo break_cipher_nstart, dopo max_iteration/nstart iterazioni resetta il cipher iniziale e parte da un punto nuovo. Per ora in history viene messo il numero di iterazioni per raggiungerlo la prima volta (che sia in 1, 2, ... n_start) potenzialmente cambiabile ma non essenziale.
