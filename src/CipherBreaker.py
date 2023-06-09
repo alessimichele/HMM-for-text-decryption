@@ -17,19 +17,19 @@ class CipherBreaker:
         """
 
         self.cipher_generator = cipher_generator
-        self.current_cipher = self.cipher_generator.generate_cipher() # Initialize the current cipher to a randomly generated one
+        self.current_cipher = (
+            self.cipher_generator.generate_cipher()
+        )  # Initialize the current cipher to a randomly generated one
         self.ciphered_text = ciphered_text
         self.probability_table = probability_table
 
-        self.decoder = (
-            TextDecoder()
-        ) 
+        self.decoder = TextDecoder()
 
         # history will store all the deciphered messages and the first time we find them and the log-likelihood associated to those
         # It is a dictionary with structure text : [first_iteration_found, log_likelihood]
-        self.history = {self.ciphered_text: [0, self.get_log_likelihood(self.ciphered_text)]}
-
-
+        self.history = {
+            self.ciphered_text: [0, self.get_log_likelihood(self.ciphered_text)]
+        }
 
     def restart_cipher(self):
         """
@@ -113,9 +113,9 @@ class CipherBreaker:
 
                 # self.decoded_texts.append(decoded_text_proposed)  # Store decoded text
                 if self.history.get(decoded_text_proposed) == None:
-                        self.history[decoded_text_proposed] = [ it , proposed_log_likelihood]
+                    self.history[decoded_text_proposed] = [it, proposed_log_likelihood]
 
-    def break_cipher_nstart(self, iterations=10000, print_interval=20, nstart = 2):
+    def break_cipher_nstart(self, iterations=10000, print_interval=20, nstart=2):
         """
         Breaks the cipher by performing iterations of swapping elements in the current cipher.
         It uses nstart starting points instead of only one, to try and avoid the situation where we are stuck in one.
@@ -129,9 +129,9 @@ class CipherBreaker:
             list: The final deciphered cipher.
         """
         for s in range(nstart):
-           i = 0
-           self.restart_cipher()
-           for it in range(int(iterations/nstart)):
+            i = 0
+            self.restart_cipher()
+            for it in range(int(iterations / nstart)):
                 proposed_cipher = self.swap(self.current_cipher.copy())
 
                 decoded_text_proposed = self.decoder.decode_text(
@@ -164,8 +164,10 @@ class CipherBreaker:
                     # self.decoded_texts.append(decoded_text_proposed)  # Store decoded text
                     # In this case we keep the number of iterations in the last, could also store the mean or something else
                     if self.history.get(decoded_text_proposed) == None:
-                        self.history[decoded_text_proposed] = [ it , proposed_log_likelihood]
-            
+                        self.history[decoded_text_proposed] = [
+                            it,
+                            proposed_log_likelihood,
+                        ]
 
     def extract_best(self, n_extract=5, return_likelihood=False):
         """
