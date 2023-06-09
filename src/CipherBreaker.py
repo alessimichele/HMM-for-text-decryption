@@ -19,10 +19,15 @@ class CipherBreaker:
         self.ciphered_text = ciphered_text
         self.probability_table = probability_table
 
-        self.decoder = TextDecoder()  # self.decoder.decode_text
-        self.lik = TextLik()  # self.lik.get_log_lik_text
+        self.decoder = TextDecoder()  # self.decoder.decode_text(text, permutated_cipher)
+        self.lik = TextLik()  # self.lik.get_log_lik_text(text, probability_table)
 
         self.decoded_texts = []  # List to store decoded texts
+
+        # Store maximum log-likelihood achieved 
+        self.max_log_lik = self.lik.get_log_likelihood(self.ciphered_text, probability_table)
+        self.max_lik_text = self.ciphered_text
+
 
     def swap(self, x):
         """
@@ -79,6 +84,11 @@ class CipherBreaker:
 
             if accept:
                 self.current_cipher = proposed_cipher
+                
+                if self.max_log_lik < proposed_log_likelihood:
+                    self.max_log_lik = proposed_log_likelihood
+                    self.max_lik_text = decoded_text_proposed
+
                 if print_interval is not None and i % print_interval == 0:
                     print(f"Iter {i}: {decoded_text_proposed}")
                 i += 1

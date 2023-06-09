@@ -155,7 +155,17 @@ class TextPreProcessor:
         for char in unknown_chars:
             text = text.replace(char, " ")
         return text
+    
+    def remove_additional_spaces(self, text):
+        """
+        Removes multiple whitespaces with only one if there are some.
 
+        Args:
+            text (str): The text to remove unknown characters from
+        """
+        text = " ".join(text.split())
+        return text
+        
     def save_text(self, text):
         """
         Saves the preprocessed text to a file named 'text_preprocessed.txt'.
