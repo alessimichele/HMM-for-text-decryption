@@ -159,4 +159,4 @@ class CipherBreaker:
 
         if filename != "cipher_iterations.gif":
             filename = filename
-        anim.save(filename, writer="imagemagick")
+        anim.save(f"GIF/{filename}", writer="imagemagick")
