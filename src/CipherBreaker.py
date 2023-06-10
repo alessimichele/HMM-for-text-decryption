@@ -94,9 +94,14 @@ class CipherBreaker:
             proposed_log_likelihood = self.get_log_likelihood(decoded_text_proposed)
             current_log_likelihood = self.get_log_likelihood(decoded_text_current)
 
-            acceptance_probability = min(
-                1, math.exp(proposed_log_likelihood - current_log_likelihood)
-            )
+            if proposed_log_likelihood > current_log_likelihood:
+                acceptance_probability = 1
+            else: 
+                acceptance_probability = math.exp(proposed_log_likelihood - current_log_likelihood)
+            
+            # to avoid math overflow
+            # acceptance_probability = min(1, math.exp(proposed_log_likelihood - current_log_likelihood))
+        
 
             accept = random.choices(
                 [True, False],
