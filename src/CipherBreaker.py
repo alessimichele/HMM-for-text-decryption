@@ -96,12 +96,13 @@ class CipherBreaker:
 
             if proposed_log_likelihood > current_log_likelihood:
                 acceptance_probability = 1
-            else: 
-                acceptance_probability = math.exp(proposed_log_likelihood - current_log_likelihood)
-            
+            else:
+                acceptance_probability = math.exp(
+                    proposed_log_likelihood - current_log_likelihood
+                )
+
             # to avoid math overflow
             # acceptance_probability = min(1, math.exp(proposed_log_likelihood - current_log_likelihood))
-        
 
             accept = random.choices(
                 [True, False],
@@ -120,7 +121,7 @@ class CipherBreaker:
                 if self.history.get(decoded_text_proposed) == None:
                     self.history[decoded_text_proposed] = [it, proposed_log_likelihood]
 
-    def break_cipher_nstart(self, iterations=10000, print_interval=20, nstart=2):
+    def break_cipher_nstart(self, iterations=10000, print_interval=20, nstart=1):
         """
         Breaks the cipher by performing iterations of swapping elements in the current cipher.
         It uses nstart starting points instead of only one, to try and avoid the situation where we are stuck in one.
@@ -149,9 +150,12 @@ class CipherBreaker:
                 proposed_log_likelihood = self.get_log_likelihood(decoded_text_proposed)
                 current_log_likelihood = self.get_log_likelihood(decoded_text_current)
 
-                acceptance_probability = min(
-                    1, math.exp(proposed_log_likelihood - current_log_likelihood)
-                )
+                if proposed_log_likelihood > current_log_likelihood:
+                    acceptance_probability = 1
+                else:
+                    acceptance_probability = math.exp(
+                        proposed_log_likelihood - current_log_likelihood
+                    )
 
                 accept = random.choices(
                     [True, False],
