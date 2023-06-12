@@ -69,6 +69,7 @@ class ProbabilityMatrix:
             )
         ones = np.sum(self.matrix)
         self.matrix = self.matrix / ones
+        self.matrix = self.matrix.T
 
     def compute_matrix_spaces(self):
         """
@@ -92,6 +93,7 @@ class ProbabilityMatrix:
 
         ones = np.sum(self.matrix)
         self.matrix = self.matrix / ones
+        self.matrix = self.matrix.T
 
     def compute_log_matrix(self):
         """
