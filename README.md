@@ -1,5 +1,21 @@
 # HMM-for-text-decryption
 
+## TO-DO
+- Mettere function2 come principale
+- Fare un notebook dove si runna bene il codice per HMM
+- Fare un Viterbi per il run finale
+- Mettere condizioni di stop sul HMM (B-W)
+- Sistemare la classe per le probabilities con i numeri
+- Scrivere una funzione per capire il messaggio decriptato (non Samu che legge molto bello ma anche no)
+- 
+- Provare tri-gram e cifratori piu complessi
+- Fare i plot per HMM
+- Comparison HMM - MCMC
+- 
+- 
+- 
+- Adattamento per correzione typo/previsione fine parola.
+
 **[Here](main.ipynb) is th algorithm descrybed by Diaconis in [this](articles/MCMCRev.pdf) article.**
 
 This repository contains *(for now)* a Python implementation of a MCMC method useful for text decryption.
