@@ -15,6 +15,12 @@
 - 
 - Adattamento per correzione typo/previsione fine parola.
 
+SAMU
+Viterbi guarda esempio, appena incontr uno spazio vengono tutti i phi in spazio.
+Possibilità di resettare dopo ogni parola? (aba abc: fare i predecessori aba e poi su abc e contare su quelli ??)
+
+Aggiusta il codice di viterbi, mancano dei log e si perde il primo messaggio (da h a z1, che andrebbe contato)
+
 **[Here](main.ipynb) is th algorithm descrybed by Diaconis in [this](articles/MCMCRev.pdf) article.**
 
 This repository contains *(for now)* a Python implementation of a MCMC method useful for text decryption.
