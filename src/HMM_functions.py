@@ -110,6 +110,7 @@ def Baum_Welch(A, B_start, pi, observed, maxIter=100):
 
         # following lines only for encryption
         B[-1, :] = np.zeros(27)
+        B[:, -1] = np.zeros(27)
         B[-1, -1] = 1
     return B
 
@@ -125,7 +126,6 @@ def solve_mapping_problem(L):
     return mapping
 
 
-
 def compute_f(A, B, observed):
     n_nodes = len(observed)
     n_states = A.shape[0]
@@ -135,7 +135,12 @@ def compute_f(A, B, observed):
         tmp = np.zeros((n_states, n_states))
         for j in range(n_states):
             for k in range(n_states):
-                tmp[j, k] = A[j, k] * B[k, observed[i + 1]]
+                if B[k, observed[i + 1]] == 0:
+                    tmp_B = np.min(B[B != 0])
+                else:
+                    tmp_B = np.log(B[k, observed[i + 1]])
+
+                tmp[j, k] = np.log(A[j, k]) + tmp_B
         f[i] = tmp
 
     return f
@@ -150,14 +155,14 @@ def Viterbi(A, B, observed):
 
     f = compute_f(A, B, observed)
 
-    pmax[0] = np.max(np.log(f[0]), axis=0)
+    pmax[0] = np.max((f[0]), axis=0)
     phi[0] = np.argmax(f[0], axis=0)
 
     for i in range(1, n_nodes - 1):
-        tmp = (np.log(f[i]).T + pmax[i-1]).T
+        tmp = ((f[i]).T + pmax[i - 1]).T
 
         pmax[i] = np.max(tmp, axis=0)
-        
+
         phi[i] = np.argmax(tmp, axis=0)
 
     return pmax, phi

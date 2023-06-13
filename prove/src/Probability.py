@@ -91,6 +91,13 @@ class ProbabilityMatrix:
             elif next_char not in self.alphabet:
                 raise ValueError(f"Character: {next_char} not in alphabet")
 
+        minimum = np.min(self.matrix[self.matrix != 0])
+
+        for i in range(self.matrix.shape[0]):
+            for j in range(self.matrix.shape[1]):
+                if self.matrix[i, j] == 0:
+                    self.matrix[i, j] = minimum
+
         ones = np.sum(self.matrix)
         self.matrix = self.matrix / ones
         self.matrix = self.matrix.T
