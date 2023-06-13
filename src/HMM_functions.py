@@ -123,3 +123,41 @@ def solve_mapping_problem(L):
     for i, num in enumerate(L):
         mapping[alphabet[i]] = alphabet[num]
     return mapping
+
+
+
+def compute_f(A, B, observed):
+    n_nodes = len(observed)
+    n_states = A.shape[0]
+    f = np.zeros((n_nodes - 1, n_states, n_states))
+
+    for i in range(n_nodes - 1):
+        tmp = np.zeros((n_states, n_states))
+        for j in range(n_states):
+            for k in range(n_states):
+                tmp[j, k] = A[j, k] * B[k, observed[i + 1]]
+        f[i] = tmp
+
+    return f
+
+
+def Viterbi(A, B, observed):
+    n_nodes = len(observed)
+    n_states = A.shape[0]
+
+    pmax = np.zeros((n_nodes - 1, n_states))
+    phi = np.zeros((n_nodes - 1, n_states))
+
+    f = compute_f(A, B, observed)
+
+    pmax[0] = np.max(np.log(f[0]), axis=0)
+    phi[0] = np.argmax(f[0], axis=0)
+
+    for i in range(1, n_nodes - 1):
+        tmp = (np.log(f[i]).T + pmax[i-1]).T
+
+        pmax[i] = np.max(tmp, axis=0)
+        
+        phi[i] = np.argmax(tmp, axis=0)
+
+    return pmax, phi
