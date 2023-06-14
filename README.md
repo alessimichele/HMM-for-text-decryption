@@ -1,12 +1,11 @@
 # HMM-for-text-decryption
 
 ## TO-DO
-- Fare un notebook dove si runna bene il codice per HMM
+
 - Fare un Viterbi per il run finale
 - Mettere condizioni di stop sul HMM (B-W)
-- Sistemare la classe per le probabilities con i numeri
 
-- 
+ 
 - Provare tri-gram e cifratori piu complessi
 - Fare i plot per HMM
 - Comparison HMM - MCMC
@@ -14,6 +13,10 @@
 - 
 - 
 - Adattamento per correzione typo/previsione fine parola.
+
+Fatti?: \
+- Fare un notebook dove si runna bene il codice per HMM
+- Sistemare la classe per le probabilities con i numeri
 
 SAMU
 Viterbi guarda esempio, appena incontr uno spazio vengono tutti i phi in spazio.
