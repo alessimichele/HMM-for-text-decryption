@@ -166,3 +166,92 @@ def Viterbi(A, B, observed):
         phi[i] = np.argmax(tmp, axis=0)
 
     return pmax, phi
+
+# Functions needed for the Viterbi code
+
+def compute_f_log(A, B, observed):
+    """
+    It constructs the factors of the HMM which are needed to perform the forward pass of the message passing algorithm.
+    Input:
+        - A : the transition matrix
+        - B : the emission matrix
+        - observed: an array containing the observed values
+    Output:
+        - f0: the factor corresponding to the initial factor to first latent variable message
+        - f: an array containig the all the other factors (n_states - 1)
+    """
+    pi = A[-1]
+    n_nodes = len(observed)
+    n_states = A.shape[0]
+    f = np.zeros((n_nodes - 1, n_states, n_states))
+
+    tmp = np.zeros((n_states, 1))
+    for k in range(n_states):
+        tmp[k] = np.log(pi[k]) + np.log(B[k, observed[0]])
+
+    f0 = tmp
+
+    for i in range(1, n_nodes):
+        tmp = np.zeros((n_states, n_states))
+
+        for j in range(n_states):  # over z1
+            for k in range(n_states):  # over z2
+                tmp[j, k] = np.log(A[j, k]) + np.log(B[k, observed[i]])
+
+        f[i - 1] = tmp
+
+    return f0, f
+
+
+def Viterbi_log(f0, f):
+    """
+    Performs the forward pass of the max plus algorithm (known as Viterbi algorithm for Hidden-Markov models).
+    Input: 
+        - f0: the factor corresponding to the initial factor to first latent variable message
+        - f: an array containig the all the other factors (n_states - 1)
+    Output:
+        - pmax: the array containing the messages of the forward pass
+        - phi: the array storing the most probable preceding state stored during the forward pass
+    """
+    n_nodes = f.shape[0] + 1
+    n_states = f.shape[1]
+
+    pmax = np.zeros((n_nodes, n_states))  # Need one for every node
+    phi = np.zeros(
+        (n_nodes - 1, n_states)
+    )  # Need one for every node other than the first one (no need to reconstruct it)
+
+    pmax[0] = f0.flatten()
+
+    for i in range(1, n_nodes):
+        tmp = ((f[i - 1]).T + pmax[i - 1]).T
+
+        pmax[i] = np.max(tmp, axis=0)  # by column
+
+        phi[i - 1] = np.argmax(
+            tmp, axis=0
+        )  # i-1 cause this contains the reconstruction about the (i-1)th element
+
+    return pmax, phi
+
+
+def reconstruct(pmax, phi):
+    """
+    Given the output of a max-plus forward pass it returns the most probable hidden states.
+    Input:
+        - pmax: the array containing the messages of the forward pass
+        - phi: the array storing the most probable preceding state stored during the forward pass
+    Output:
+        - An array of int that coincides with the most probable latent states
+    """
+    reconstruction = np.empty(len(phi) + 1)
+
+    curr = np.argmax(pmax[-1])
+    reconstruction[-1] = curr
+
+    for i in range(len(phi) - 1, -1, -1):
+        curr = int(phi[i, curr])
+        reconstruction[i] = curr
+
+    return reconstruction
+

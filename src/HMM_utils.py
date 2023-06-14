@@ -77,3 +77,22 @@ def invert_mapping(mapping):
     """
     inverted_mapping = {value: key for key, value in mapping.items()}
     return inverted_mapping
+
+
+
+def convert_numbers_to_letters(numbers):
+    """
+    Converts i in the (i+1)-th element in the alphabet, with " " being denoted by 26.
+    Input: 
+        - numbers: a numpy array containing the numbers
+    Output:
+        - letters: a list containing the string that was represented by numbers.
+    """
+    letters = []
+    for number in numbers:
+        if number == 26:
+            letters.append(" ")
+        else:
+            letter = chr(number + ord("a"))
+            letters.append(letter)
+    return "".join(letters)
