@@ -1,8 +1,6 @@
 # HMM-for-text-decryption
 
 ## TO-DO
-
-- Mettere condizioni di stop sul HMM (B-W)
  
 - Provare tri-gram e cifratori piu complessi
 - Fare i plot per HMM
