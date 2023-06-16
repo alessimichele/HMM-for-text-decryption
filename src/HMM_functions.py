@@ -100,13 +100,24 @@ def update_B(gamma, observed):
     return divide_row_by_sum(B)
 
 
-def Baum_Welch(A, B_start, pi, observed, maxIter=100):
+def Baum_Welch(A, B_start, pi, observed, maxIter=100, tol = 1e-4):
     B = np.copy(B_start)
+    changed = 0 # change is set to 1 whenever at least one coordinate increases by more than tol
     for it in range(maxIter):
         alpha_hat, c = forward_HMM(A, B, pi, observed)
         beta_hat = backward_HMM(A, B, observed, c)
         gamma = compute_all_conditional(alpha_hat, beta_hat)
+        B_old = B
         B = update_B(gamma, observed)
+
+        # Check if conerged or still changing
+        change = np.abs(B - B_old)
+        max_change = np.max(change)
+
+        if(max_change < tol):
+            print("Not updating anymore after iteration", it)
+            break
+
 
         # following lines only for encryption
         B[-1, :] = np.zeros(27)
