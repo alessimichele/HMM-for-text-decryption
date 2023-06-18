@@ -1,5 +1,6 @@
 import random
 import math
+import numpy as np
 
 
 class CipherGenerator:
@@ -13,6 +14,31 @@ class CipherGenerator:
         alphabet = list("abcdefghijklmnopqrstuvwxyz")
         random.shuffle(alphabet)
         return alphabet
+
+    def generate_double_cipher(self):
+        """
+        Generates a double cipher, which is a combination of two randomly shuffled ciphers.
+
+        Returns:
+            list: A list representing the generated double cipher.
+
+        The double cipher is created by generating two random ciphers and combining them. Each cipher
+        is a shuffled version of the alphabet. The double cipher is formed by randomly selecting elements
+        from either of the two ciphers based on a binary choice.
+        """
+        cipher1 = self.generate_cipher()
+        cipher2 = self.generate_cipher()
+
+        output = [0] * len(cipher1)
+
+        choice = np.random.binomial(1, 0.5, len(cipher1))
+
+        for i in range(len(cipher1)):
+            if choice[i] == 0:
+                output[i] = cipher1[i]
+            else:
+                output[i] = cipher2[i]
+        return output
 
 
 class TextEncoder:
