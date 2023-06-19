@@ -1,5 +1,6 @@
 import random
 import math
+import numpy as np
 
 
 class CipherGenerator:
@@ -13,6 +14,32 @@ class CipherGenerator:
         alphabet = list("abcdefghijklmnopqrstuvwxyz")
         random.shuffle(alphabet)
         return alphabet
+
+    """def generate_double_cipher(self):
+        
+        Generates a double cipher, which is a combination of two randomly shuffled ciphers.
+
+        Returns:
+            list: A list representing the generated double cipher.
+
+        The double cipher is created by generating two random ciphers and combining them. Each cipher
+        is a shuffled version of the alphabet. The double cipher is formed by randomly selecting elements
+        from either of the two ciphers based on a binary choice.
+        
+        cipher1 = self.generate_cipher()
+        cipher2 = self.generate_cipher()
+
+        output = [0] * len(cipher1)
+
+        choice = np.random.binomial(1, 0.5, len(cipher1))
+
+        for i in range(len(cipher1)):
+            if choice[i] == 0:
+                output[i] = cipher1[i]
+            else:
+                output[i] = cipher2[i]
+        return output
+"""
 
 
 class TextEncoder:
@@ -37,6 +64,36 @@ class TextEncoder:
                 encoded_text.append(encoded_char)
             else:
                 encoded_text.append(char)
+        return "".join(encoded_text)
+
+    def encode_text_double_cipher(self, text, cipher1, cipher2):
+        """
+        Encode thr given text using two ciphers.
+
+        Returns:
+            str: The encoded text.
+
+        The double cipher encoder is created from two random ciphers and combining them. Each cipher
+        is a shuffled version of the alphabet. The double cipher is formed by randomly selecting elements
+        from either of the two ciphers based on a binary choice.
+
+        WARNING: class TextDecoder is not define for text encoded by a double cipher.
+        """
+        encoded_text = []
+        choice = np.random.binomial(1, 0.5, len(text))
+
+        for i in range(len(text)):
+            if text[i].isalpha():
+                index = ord(text[i].lower()) - ord("a")
+                if choice[i] == 0:
+                    encoded_char = cipher1[index]
+                else:
+                    encoded_char = cipher2[index]
+                if text[i].isupper():
+                    encoded_char = encoded_char.upper()
+                encoded_text.append(encoded_char)
+            else:
+                encoded_text.append(text[i])
         return "".join(encoded_text)
 
 
