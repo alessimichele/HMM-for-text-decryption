@@ -229,3 +229,42 @@ class CipherBreaker:
         if filename != "cipher_iterations.gif":
             filename = filename
         anim.save(f"GIF/{filename}", writer="imagemagick")
+
+    def generate_animation_130(self, filename="cipher_iterations.gif"):
+        """
+        Generates an animation of the cipher breaking process and saves it as a GIF.
+        """
+        fig = plt.figure(figsize=(8, 6))  # Adjust the figure size as desired
+
+        def update(i):
+            plt.clf()
+            # decoded_text = self.decoded_texts[i]
+            decoded_text = list(self.history.keys())[i]
+            decoded_text = decoded_text[:130]  # Keep only the first 130 characters
+            lines = []
+            current_line = ""
+            for word in decoded_text.split():
+                if (
+                    len(current_line) + len(word) + 1 > 20
+                ):  # Adjust the line length as desired
+                    lines.append(current_line)
+                    current_line = word
+                else:
+                    if current_line:
+                        current_line += " "
+                    current_line += word
+            lines.append(current_line)
+
+            justified_text = "\n".join(lines)
+            plt.text(
+                0.5, 0.5, justified_text, fontsize=16, ha="left", va="center"
+            )  # Adjust the horizontal alignment to 'left'
+            plt.axis("off")
+
+        anim = FuncAnimation(
+            fig, update, frames=len(self.history), interval=100
+        )  # Decreased interval for faster animation
+
+        if filename != "cipher_iterations.gif":
+            filename = filename
+        anim.save(f"GIF/{filename}", writer="imagemagick")
