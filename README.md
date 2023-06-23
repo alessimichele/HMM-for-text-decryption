@@ -5,6 +5,11 @@ The method is applied for decrypting messages which have been encoded using subs
 
 **[Here](Decryption%20using%20HMM.pdf) there is the outline of our project.**
 ## Repository description
+- [main_HMM.ipynb](main_HMM.ipynb) running for the HMM model on subsitution cipher.
+- [main_HMM_homophonic.ipynb](main_HMM_homophonic.ipynb)  running for the HMM model on homophonic cipher.
+- [main_HMM_double_cipher.ipynb](main_HMM_double_cipher.ipynb)  running for the HMM model on double cipher.
+- [main_MCMC.ipynb](main_MCMC.ipynb) running for the MCMC model on subsitution cipher.
+- [main_MCMC_double_cipher.ipynb](main_MCMC_double_cipher.ipynb) running for the MCMC model on double cipher.
 
 - [src](src/) contains the implementation of the algorithms and other functions needed for preprocessing and evaluattion written from scratch.
 
@@ -50,9 +55,7 @@ The method is applied for decrypting messages which have been encoded using subs
 - [articles](articles/) contains some interesting articles about the topic.
 
 ## Example
-In [main_HMM.ipynb](main_HMM.ipynb) there are a running examples for the HMM model. Just play with it!
-
-In [main_MCMC.ipynb](main_MCMC.ipynb) there are running examples for MCMC approach. Somw results are reported below.
+In [main_MCMC.ipynb](main_MCMC.ipynb) there are running examples on subsitution cipher for MCMC approach. Some results are reported below, play with it!
 
 Original Text: *she is not acting by design as yet she cannot even be certain of the degree of her own regard nor of its reasonableness she has known him only a fortnight she danced four dances with him at meryton she saw him one morning at his own house and has since dined in company with him four times*
 
