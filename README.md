@@ -3,7 +3,7 @@
 This repository contains Python implementation of a MCMC and HMM methods for text decryption.
 The method is applied for decrypting messages which have been encoded using substitution cipher, homophonic cipher an double cipher.
 
-**[Here](Decription%20using%20HMM.pdf) there is the outline of our project.**
+**[Here](Decryption%20using%20HMM.pdf) there is the outline of our project.**
 ## Repository description
 
 - [src](src/) contains the implementation of the algorithms and other functions needed for preprocessing and evaluattion written from scratch.
