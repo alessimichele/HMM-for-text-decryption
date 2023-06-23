@@ -1,12 +1,7 @@
 # HMM-for-text-decryption
 
-This repository contains *(for now)* a Python implementation of a MCMC method useful for text decryption.
-The method is applied for decrypting messages which have been encoded using a substitution cipher.
-
-## Readme is going to be updated soon
-
-
-**[Here](main.ipynb) is th algorithm descrybed by Diaconis in [this](articles/MCMCRev.pdf) article.**
+This repository contains Python implementation of a MCMC and HMM methods for text decryption.
+The method is applied for decrypting messages which have been encoded using substitution cipher, homophonic cipher an double cipher.
 
 
 ## Repository description
@@ -45,11 +40,14 @@ The method is applied for decrypting messages which have been encoded using a su
       
     
     
-- [texts](texts/) contains the texts used to learn the transition probabilities.
+- [texts](texts/) contains the corpus used to learn the transition probabilities.
 
-- [outputs](outputs/) contains some ```.txt``` outputs from [main.ipynb](main.ipynb).
+- [outputs](outputs/) contains:
+    - accuracies coming from evaluation modules.
+    - probability matrix of bigrams computed using the corpus.
 
 - [GIF](GIF/) contains ```.gif``` outputs from [main.ipynb](main.ipynb).
+- [Articles](articles/) contains some interesting articles about the topic.
 
 ## Example
 
@@ -70,11 +68,3 @@ Original Text: *there were better sense in the sad mechanic exercise of determin
 
 ![](GIF/there%20were.gif)
 
-## To do
-
-- HMM
-
-## Last big updates
-
-- Aggiornato history che ora mantiene anche la prima iterazione dove il messaggio è decryptato in un determinato modo oltre che alla log-likelihood associata.
-- Aggiunto il metodo break_cipher_nstart, dopo max_iteration/nstart iterazioni resetta il cipher iniziale e parte da un punto nuovo. Per ora in history viene messo il numero di iterazioni per raggiungerlo la prima volta (che sia in 1, 2, ... n_start) potenzialmente cambiabile ma non essenziale.
