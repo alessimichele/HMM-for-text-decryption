@@ -50,8 +50,9 @@ The method is applied for decrypting messages which have been encoded using subs
 - [articles](articles/) contains some interesting articles about the topic.
 
 ## Example
+In [main_HMM.ipynb](main_HMM.ipynb) there are a running examples for the HMM model. Just play with it!
 
-The following gifs are the result of running [main_MCMC.ipynb](main_MCMC.ipynb) with different text.
+In [main_MCMC.ipynb](main_MCMC.ipynb) there are running examples for MCMC approach. Somw results are reported below.
 
 Original Text: *she is not acting by design as yet she cannot even be certain of the degree of her own regard nor of its reasonableness she has known him only a fortnight she danced four dances with him at meryton she saw him one morning at his own house and has since dined in company with him four times*
 
