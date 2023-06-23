@@ -1,16 +1,17 @@
 # HMM-for-text-decryption
 
+This repository contains *(for now)* a Python implementation of a MCMC method useful for text decryption.
+The method is applied for decrypting messages which have been encoded using a substitution cipher.
+
 ## Readme is going to be updated soon
 
 
 **[Here](main.ipynb) is th algorithm descrybed by Diaconis in [this](articles/MCMCRev.pdf) article.**
 
-This repository contains *(for now)* a Python implementation of a MCMC method useful for text decryption.
-The method is applied for decrypting messages which have been encoded using a substitution cipher.
 
 ## Repository description
 
-- [src](src/) contains the definition of the classes written from scratch.
+- [src](src/) contains the implementation of the algorithms and other functions needed for preprocessing and evaluattion written from scratch.
 
     - [CipherUtils.py](src/CipherUtils.py) 
         - Cipher Generator \
@@ -25,14 +26,24 @@ The method is applied for decrypting messages which have been encoded using a su
         - Text Preprocessor \
             The Text Preprocessor is a Python class that performs preprocessing operations on text. It provides methods for converting text to lowercase, finding unknown characters in the text, removing unknown characters from the text, removing extra-spaces, and saving the preprocessed text to a file.
 
-
-
     - [ProbabilityMatrix.py](src/ProbabilityMatrix.py) \
-        The Probability Matrix is a Python class designed to compute the probability matrix for two-character sequences in a given text. It offers methods for computing the probability table, retrieving the probability of a specific sequence, and saving the computed data to files.
+            Probability Matrix is a class used to compute the probability table and the probability matrix for all bigrams within a given text. It is used both for MCMC and HMM approach.
+      
+    - MCMC
+        - [CipherBreaker.py](src/CipherBreaker.py) \
+            The Cipher Breaker is a Python class that aims to break a given cipher by performing iterations of swapping elements in the current cipher using MCMC eexploration. It uses a probability table, a decoder, and a likelihood calculator to evaluate the quality of each proposed cipher during the breaking process. The class also provides functionality to generate an animation of the breaking process.
+    - HMM
+      - [HMM_functions.py](src/HMM_functions.py) \
+            Contains Baum-Welch algorithm and Viterbi algorithm implementation.
+      - [HMM_utils.py](src/HMM_utils.py) \
+            This module provides functions to map characters in the alphabet to corresponding numbers, convert strings to lists of numbers based on a given mapping, create mappings between indices and characters.
 
-
-    - [CipherBreaker.py](src/CipherBreaker.py) \
-        The Cipher Breaker is a Python class that aims to break a given cipher by performing iterations of swapping elements in the current cipher. It uses a probability table, a decoder, and a likelihood calculator to evaluate the quality of each proposed cipher during the breaking process. The class also provides functionality to generate an animation of the breaking process.
+    - [evaluation.py](src/evaluation.py) \
+            This module provides functions for MCMC and HMM performances comparison.
+    
+        
+      
+    
     
 - [texts](texts/) contains the texts used to learn the transition probabilities.
 
