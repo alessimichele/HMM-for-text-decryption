@@ -100,9 +100,9 @@ def update_B(gamma, observed):
     return divide_row_by_sum(B)
 
 
-def Baum_Welch(A, B_start, pi, observed, maxIter=100, tol = 1e-4):
+def Baum_Welch(A, B_start, pi, observed, maxIter=100, tol=1e-4):
     B = np.copy(B_start)
-    changed = 0 # change is set to 1 whenever at least one coordinate increases by more than tol
+    changed = 0  # change is set to 1 whenever at least one coordinate increases by more than tol
     for it in range(maxIter):
         alpha_hat, c = forward_HMM(A, B, pi, observed)
         beta_hat = backward_HMM(A, B, observed, c)
@@ -114,10 +114,9 @@ def Baum_Welch(A, B_start, pi, observed, maxIter=100, tol = 1e-4):
         change = np.abs(B - B_old)
         max_change = np.max(change)
 
-        if(max_change < tol):
+        if max_change < tol:
             print("Not updating anymore after iteration", it)
             break
-
 
         # following lines only for encryption
         B[-1, :] = np.zeros(27)
@@ -138,6 +137,7 @@ def solve_mapping_problem(L):
 
 
 # Functions needed for the Viterbi code
+
 
 def compute_f_log(A, B, observed):
     """
@@ -176,7 +176,7 @@ def compute_f_log(A, B, observed):
 def Viterbi_log(f0, f):
     """
     Performs the forward pass of the max plus algorithm (known as Viterbi algorithm for Hidden-Markov models).
-    Input: 
+    Input:
         - f0: the factor corresponding to the initial factor to first latent variable message
         - f: an array containig the all the other factors (n_states - 1)
     Output:
@@ -224,4 +224,3 @@ def reconstruct(pmax, phi):
         reconstruction[i] = curr
 
     return reconstruction
-
