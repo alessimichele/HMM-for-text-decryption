@@ -1,13 +1,6 @@
 # HMM-for-text-decryption
 
-## TO-DO
- 
-- Provare tri-gram e cifratori piu complessi
-- Fare i plot per HMM
-- Comparison HMM - MCMC
- 
-- 
-- Adattamento per correzione typo/previsione fine parola.
+## Readme is going to be updated soon
 
 
 **[Here](main.ipynb) is th algorithm descrybed by Diaconis in [this](articles/MCMCRev.pdf) article.**
