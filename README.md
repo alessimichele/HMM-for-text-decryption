@@ -47,7 +47,7 @@ The method is applied for decrypting messages which have been encoded using subs
     - probability matrix of bigrams computed using the corpus.
 
 - [GIF](GIF/) contains ```.gif``` outputs from [main.ipynb](main.ipynb).
-- [Articles](articles/) contains some interesting articles about the topic.
+- [articles](articles/) contains some interesting articles about the topic.
 
 ## Example
 
